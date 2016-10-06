@@ -1,0 +1,1 @@
+angular.module('nplvoxelizer_app', ['ui.bootstrap']);

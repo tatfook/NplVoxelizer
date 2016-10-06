@@ -1,0 +1,8 @@
+.vs
+npl_packages
+*.db
+*.opendb
+*.user
+*.sdf
+*.suo
+Debug

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Mod">
+      <UniqueIdentifier>{0f675f62-1dbd-4824-9d68-46cc23fb3dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mod\NplVoxelizer">
+      <UniqueIdentifier>{52d5c3d4-9e31-44c3-84e7-21e9dcade1dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script">
+      <UniqueIdentifier>{07261761-2f6e-4be3-8ef0-80f4be29e607}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps">
+      <UniqueIdentifier>{87d24347-80ac-47c5-ac1a-e2cafb9e1926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps\WebServer">
+      <UniqueIdentifier>{094bbc8c-944a-4f1a-abae-c25e05739ebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps\WebServer\admin">
+      <UniqueIdentifier>{e4e87740-c420-4618-bbd4-ba44a9ec54c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps\WebServer\admin\wp-content">
+      <UniqueIdentifier>{7a37c207-1416-482c-9b07-386bdba662e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps\WebServer\admin\wp-content\pages">
+      <UniqueIdentifier>{36b950c5-4dba-45eb-8d7d-bf7a35139532}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer">
+      <UniqueIdentifier>{6c6fda1b-4db4-4b2a-b38f-1ee53e81372f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\controllers">
+      <UniqueIdentifier>{69b69626-d78c-4f36-be0c-276f052c9ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\templates">
+      <UniqueIdentifier>{9d7c2d28-2f2b-47ff-98d1-d79aaacc0860}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Mod\NplVoxelizer\main.lua">
+      <Filter>Mod\NplVoxelizer</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer.page">
+      <Filter>script\apps\WebServer\admin\wp-content\pages</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\app.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\controllers\NplVoxelizerController.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\controllers</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\templates\NplVoxelizerTemplate.html">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\templates</Filter>
+    </None>
+    <None Include="Mod\NplVoxelizer\NplVoxelizerService.lua">
+      <Filter>Mod\NplVoxelizer</Filter>
+    </None>
+  </ItemGroup>
+</Project>
