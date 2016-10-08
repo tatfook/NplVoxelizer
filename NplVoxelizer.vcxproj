@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Mod\NplVoxelizer\main.lua" />
-    <None Include="Mod\NplVoxelizer\NplVoxelizerService.lua" />
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer.page" />
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\app.js" />
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\controllers\NplVoxelizerController.js" />

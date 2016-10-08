@@ -51,8 +51,5 @@
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\templates\NplVoxelizerTemplate.html">
       <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\templates</Filter>
     </None>
-    <None Include="Mod\NplVoxelizer\NplVoxelizerService.lua">
-      <Filter>Mod\NplVoxelizer</Filter>
-    </None>
   </ItemGroup>
 </Project>
