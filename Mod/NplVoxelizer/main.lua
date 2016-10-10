@@ -28,6 +28,9 @@ end
 
 function NplVoxelizer:init()
 	LOG.std(nil, "info", "NplVoxelizer", "plugin initialized");
+	NPL.load("npl_packages/NplCadLibrary/");
+	NPL.load("npl_packages/ModelVoxelizer/");
+
 end
 
 function NplVoxelizer:OnLogin()

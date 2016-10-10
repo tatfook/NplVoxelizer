@@ -20,6 +20,15 @@ wp_enqueue_script("NplVoxelizerController",				"/wp-content/pages/nplvoxelizer/c
 
 NPL.load("(gl)Mod/ModelVoxelizer/services/ModelVoxelizerService.lua");
 local ModelVoxelizerService = commonlib.gettable("Mod.ModelVoxelizer.services.ModelVoxelizerService");
+
+local data = request:get("data");
+if(is_ajax()) then
+	add_action('wp_ajax_nplvoxelizer_upload', function()
+		local result = ModelVoxelizerService.upload(data);
+		wp_send_json({result},true);
+    end)
+	return;
+end
 ?>
 <div ng-app="nplvoxelizer_app">
 	<nplvoxelizer></nplvoxelizer>
