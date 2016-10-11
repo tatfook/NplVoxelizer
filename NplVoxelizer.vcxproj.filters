@@ -34,6 +34,15 @@
     <Filter Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\templates">
       <UniqueIdentifier>{9d7c2d28-2f2b-47ff-98d1-d79aaacc0860}</UniqueIdentifier>
     </Filter>
+    <Filter Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs">
+      <UniqueIdentifier>{14035b06-1edb-468f-bd1e-06bbe5a4d7b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs">
+      <UniqueIdentifier>{f07b3484-50ee-4726-8efe-b889e04ac1f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\controls">
+      <UniqueIdentifier>{a2e347f1-9031-47a7-b775-ccf29968f15c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Mod\NplVoxelizer\main.lua">
@@ -51,5 +60,52 @@
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\templates\NplVoxelizerTemplate.html">
       <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\templates</Filter>
     </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\Blob.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\FileSaver.min.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\rzslider.min.css">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\rzslider.min.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\dark.css">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\light.css">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\main.css">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\three.min.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\ui.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\ui.three.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\controls\TransformControls.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\controls</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\controls\EditorControls.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\controls</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\controls\OrbitControls.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\controls</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\STLLoader.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\ajaxloader.gif">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs</Filter>
+    </Image>
   </ItemGroup>
 </Project>

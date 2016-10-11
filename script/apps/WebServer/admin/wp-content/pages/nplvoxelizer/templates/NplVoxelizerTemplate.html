@@ -1,3 +1,23 @@
-<div>
-     <input type="file" onchange="angular.element(this).scope().uploadFile(this.files)" />
+﻿<div>
+
+    <div class="row">
+        <input type="file" style="padding:10px;" onchange="angular.element(this).scope().uploadFile(this.files)" />
+        <div class="col-lg-12" id="view_container" ></div>
+
+        <div class="col-md-6">
+            <rzslider rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
+        </div>
+        <div class="col-md-6">
+            <div style="margin-top:20px;">
+                <span>文件名:</span>
+                <input type="text" ng-model="file_name" style="margin-left:5px;"/>
+                <input type="button" value="下载" ng-click="downloadFile()"/>
+            </div>
+            
+        </div>
+    </div>
+
+    <div id="mask">
+        <img src="wp-content/pages/nplvoxelizer/libs/ajaxloader.gif" class="loader"/>
+    </div>
 </div>

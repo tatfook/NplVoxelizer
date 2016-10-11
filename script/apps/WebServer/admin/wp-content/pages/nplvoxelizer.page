@@ -14,6 +14,24 @@ wp_enqueue_script("ui-bootstrap-tpls",			"/wp-includes/js/angular/ui-bootstrap-t
 wp_enqueue_style("bootstrap-css",				"/wp-includes/js/bootstrap/css/bootstrap.min.css");
 wp_enqueue_script("jquery",						"/wp-includes/js/jquery/jquery.min.js");
 
+wp_enqueue_script("nplcad_FileSaver",					"/wp-content/pages/nplvoxelizer/libs/FileSaver.min.js");
+wp_enqueue_script("nplcad_Blob",					"/wp-content/pages/nplvoxelizer/libs/Blob.js");
+
+--reslider
+wp_enqueue_script("rzslider",					"/wp-content/pages/nplvoxelizer/libs/rzslider.min.js");
+wp_enqueue_style("rzslider-css",				"/wp-content/pages/nplvoxelizer/libs/rzslider.min.css");
+
+--threejs
+wp_enqueue_script("threejs",					"/wp-content/pages/nplvoxelizer/libs/threejs/three.min.js");
+wp_enqueue_script("threejs-ui-lib",					"/wp-content/pages/nplvoxelizer/libs/threejs/ui.js");
+wp_enqueue_script("threejs-ui",					"/wp-content/pages/nplvoxelizer/libs/threejs/ui.three.js");
+wp_enqueue_script("EditorControls",					"/wp-content/pages/nplvoxelizer/libs/threejs/controls/EditorControls.js");
+wp_enqueue_script("TransformControls",					"/wp-content/pages/nplvoxelizer/libs/threejs/controls/TransformControls.js");
+wp_enqueue_script("OrbitControls",					"/wp-content/pages/nplvoxelizer/libs/threejs/controls/OrbitControls.js");
+wp_enqueue_script("STLLoader",					"/wp-content/pages/nplvoxelizer/libs/threejs/STLLoader.js");
+wp_enqueue_style("threejs-css",				"/wp-content/pages/nplvoxelizer/libs/threejs/main.css");
+wp_enqueue_style("threejs-light-css",				"/wp-content/pages/nplvoxelizer/libs/threejs/light.css");
+
 wp_enqueue_script("nplvoxelizer_app",					"/wp-content/pages/nplvoxelizer/app.js");
 wp_enqueue_script("NplVoxelizerController",				"/wp-content/pages/nplvoxelizer/controllers/NplVoxelizerController.js");
 
@@ -22,14 +40,36 @@ NPL.load("(gl)Mod/ModelVoxelizer/services/ModelVoxelizerService.lua");
 local ModelVoxelizerService = commonlib.gettable("Mod.ModelVoxelizer.services.ModelVoxelizerService");
 
 local data = request:get("data");
+local block_length = request:get("block_length");
+block_length = tonumber(block_length);
+local input_format = request:get("input_format");
+local output_format = request:get("output_format");
 if(is_ajax()) then
-	add_action('wp_ajax_nplvoxelizer_upload', function()
-		local result = ModelVoxelizerService.upload(data);
+	add_action('wp_ajax_nplvoxelizer_voxelizer', function()
+		local result = ModelVoxelizerService.voxelizer(data,block_length,input_format,output_format);
 		wp_send_json({result},true);
     end)
 	return;
 end
 ?>
+<style>
+#mask {  
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:1000;
+ }
+ .loader {
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    margin-left: -64px; /* -1 * image width / 2 */
+    margin-top: -64px;  /* -1 * image height / 2 */
+    display: block;     
+}
+</style>
 <div ng-app="nplvoxelizer_app">
 	<nplvoxelizer></nplvoxelizer>
 </div>

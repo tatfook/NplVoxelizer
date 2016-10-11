@@ -23,7 +23,24 @@
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer.page" />
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\app.js" />
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\controllers\NplVoxelizerController.js" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\Blob.js" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\FileSaver.min.js" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\rzslider.min.css" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\rzslider.min.js" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\controls\EditorControls.js" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\controls\OrbitControls.js" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\controls\TransformControls.js" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\dark.css" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\light.css" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\main.css" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\STLLoader.js" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\three.min.js" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\ui.js" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\ui.three.js" />
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\templates\NplVoxelizerTemplate.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\ajaxloader.gif" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{61255F9F-9CEC-459C-A2C2-97774498BBE0}</ProjectGuid>
