@@ -43,6 +43,15 @@
     <Filter Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\controls">
       <UniqueIdentifier>{a2e347f1-9031-47a7-b775-ccf29968f15c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\bootstrap">
+      <UniqueIdentifier>{a4ea2a86-b474-4ff1-85be-9ebf231fd65f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\bootstrap\js">
+      <UniqueIdentifier>{409dd9ba-12f3-48b2-aab7-20e9ffea28af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\bootstrap\css">
+      <UniqueIdentifier>{d0dd07ed-b544-4e62-bc16-bf70357f9c26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Mod\NplVoxelizer\main.lua">
@@ -101,6 +110,12 @@
     </None>
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs\STLLoader.js">
       <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\threejs</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\bootstrap\css\bootstrap.min.css">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\bootstrap\css</Filter>
+    </None>
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\bootstrap\js\bootstrap.min.js">
+      <Filter>script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\bootstrap\js</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

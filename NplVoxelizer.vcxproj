@@ -24,6 +24,8 @@
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\app.js" />
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\controllers\NplVoxelizerController.js" />
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\Blob.js" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\bootstrap\css\bootstrap.min.css" />
+    <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\bootstrap\js\bootstrap.min.js" />
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\FileSaver.min.js" />
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\rzslider.min.css" />
     <None Include="script\apps\WebServer\admin\wp-content\pages\nplvoxelizer\libs\rzslider.min.js" />

@@ -6,7 +6,7 @@ nplvoxelizer.component("nplvoxelizer", {
         if (Page)
             Page.ShowSideBar(false);
         $('#mask').hide();
-
+        
         var view_container = document.getElementById('view_container');
         var container, stats;
         var camera, scene, renderer;
@@ -75,14 +75,7 @@ nplvoxelizer.component("nplvoxelizer", {
             controls.update();
             transformControl.update();
 
-            if (!$scope.is_loading) {
-                if ($scope.slider && $scope.slider.value) {
-                    if ($scope.last_slider_value != $scope.slider.value) {
-                        $scope.last_slider_value = $scope.slider.value;
-                        voxelizer()
-                    }
-                }
-            }
+            
         }
 
         function render() {
@@ -116,8 +109,7 @@ nplvoxelizer.component("nplvoxelizer", {
         $scope.input_format = "stl";
         $scope.output_format = "stl";
         $scope.output_content = "";
-        $scope.file_name = "";
-        $scope.last_slider_value = -1;
+        $scope.input_file_name = null;
         $scope.is_loading = false;
         $scope.slider = {
             value: 8,
@@ -145,33 +137,86 @@ nplvoxelizer.component("nplvoxelizer", {
             }
             return bytes.buffer;
         }
+        function get_filename_ext(fileName) {
+            var name = fileName.substr(0, fileName.lastIndexOf('.'));
+            var ext = fileName.substr(fileName.lastIndexOf('.') + 1);
+            return [name,ext];
+        }
         $scope.uploadFile = function (files) {
+            $scope.input_content = null;
+            $scope.output_content = null;
+            clearMeshes();
+
+            if (files.length == 0) {
+                return;
+            }
+            var file = files[0];
+            $scope.input_file_name = file.name;
+
+            var arr = get_filename_ext(file.name);
+            // get input format
+            $scope.input_format = arr[1];
+
             var reader = new FileReader();
             reader.onload = function () {
                 var arrayBuffer = reader.result;
                 $scope.input_content = arrayBufferToBase64(arrayBuffer)
-
-                $scope.last_slider_value = -1;
-                $scope.output_content = null;
-
-                clearMeshes();
+                voxelizer();
             };
             reader.readAsArrayBuffer(files[0]);
         }
-        $scope.voxelizer = function (callback) {
-            $http.get("ajax/nplvoxelizer?action=nplvoxelizer_voxelizer&data=" + $scope.input_content
-                    + "&block_length=" + $scope.slider.value
-                    + "&input_format=" + $scope.input_format
-                    + "&output_format=" + $scope.output_format).then(function (response) {
-                        var content = response.data[0];
-                        console.log("CreateNewProject response value:")
-                        if (content) {
-                            $scope.output_content = window.atob(content);
-                            if (callback) {
-                                callback();
-                            }
-                        }
-                    });
+        function voxelizer_request(callback) {
+            var url = "ajax/nplvoxelizer?action=nplvoxelizer_voxelizer";
+            console.log("voxelizer request data length:", $scope.input_content.length, "block_length:", $scope.slider.value, "input_format:", $scope.input_format, "output_format:", $scope.output_format);
+            var data =  {
+                data: $scope.input_content,
+                block_length: $scope.slider.value,
+                input_format: $scope.input_format,
+                output_format: $scope.output_format
+            }; 
+            $http.post(url,data).then(function (response) {
+                var content = response.data[0];
+                console.log("CreateNewProject response value")
+                if (content) {
+                    $scope.output_content = window.atob(content);
+                    if (callback) {
+                        callback();
+                    }
+                }
+            })
+            //var req = {
+            //    method: 'POST',
+            //    url: url,
+            //    data: {
+            //        data: $scope.input_content,
+            //        block_length: $scope.slider.value,
+            //        input_format: $scope.input_format,
+            //        output_format: $scope.output_format
+            //    }
+            //}
+            //$http(req).then(function (response) {
+            //    var content = response.data[0];
+            //    console.log("CreateNewProject response value")
+            //    if (content) {
+            //        $scope.output_content = window.atob(content);
+            //        if (callback) {
+            //            callback();
+            //        }
+            //    }
+            //})
+            //$http.get("ajax/nplvoxelizer?action=nplvoxelizer_voxelizer&data=" + $scope.input_content
+            //        + "&block_length=" + $scope.slider.value
+            //        + "&input_format=" + $scope.input_format
+            //        + "&output_format=" + $scope.output_format).then(function (response) {
+            //            var content = response.data[0];
+            //            console.log("CreateNewProject response value")
+            //            if (content) {
+            //                $scope.output_content = window.atob(content);
+            //                if (callback) {
+            //                    callback();
+            //                }
+            //            }
+            //        });
         }
         function removeObject(object) {
             if (object.parent === null) return;
@@ -183,13 +228,13 @@ nplvoxelizer.component("nplvoxelizer", {
             }
             meshes.splice(0, meshes.length);
         }
-        function voxelizer() {
+        function voxelizer(callback) {
             if (!$scope.input_content) {
                 return
             }
             $scope.is_loading = true;
             $('#mask').show();
-            $scope.voxelizer(function () {
+            voxelizer_request(function () {
                 $('#mask').hide();
                 clearMeshes();
                 var loader = new THREE.STLLoader();
@@ -200,36 +245,52 @@ nplvoxelizer.component("nplvoxelizer", {
                 scene.add(mesh);
                 meshes.push(mesh);
                 $scope.is_loading = false;
-
                 if (callback) {
                     callback();
                 }
             })
         }
-            function onSave() {
-            if ($scope.output_content && $scope.file_name) {
-                var blob = new Blob([$scope.output_content], { type: 'text/plain' });
-                saveAs(blob, $scope.file_name + '.' + $scope.output_format);
+        function saveFile(fileName,output_format) {
+            var arr = get_filename_ext(fileName);
+            var name = arr[0];
+            var ext = arr[1];
+
+            if (output_format == ext) {
+                name = name + ".voxel." + output_format;
+            } else {
+                name = name + "." + output_format;
             }
-        }
-        $scope.downloadFile = function () {
-            if (!$scope.file_name) {
-                alert("请输入文件名！");
-                return
-            }
+            console.log("onSave:", name);
             if ($scope.output_content) {
-                $('#mask').show();
-                onSave();
-                $('#mask').hide();
-                return
-            } else{
-                $scope.preview(function () {
-                    onSave();
-                })
+                var blob = new Blob([$scope.output_content], { type: 'text/plain' });
+                saveAs(blob, name);
             }
-            
-            
         }
+        $scope.onSave = function (format) {
+
+            if (!$scope.input_file_name) {
+                return
+            }
+
+            var last_output_format = $scope.output_format;
+
+            $scope.output_format = format;
+
+            if (last_output_format != format) {
+
+                voxelizer(function () {
+                    saveFile($scope.input_file_name, $scope.output_format);
+                })
+                return;
+            }
+            saveFile($scope.input_file_name, $scope.output_format);
+        }
+
+        $scope.$on("slideEnded", function () {
+            if (!$scope.is_loading) {
+                voxelizer()
+            }
+        });
     }
 })
 
