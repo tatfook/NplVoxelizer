@@ -112,10 +112,10 @@ nplvoxelizer.component("nplvoxelizer", {
         $scope.input_file_name = null;
         $scope.is_loading = false;
         $scope.slider = {
-            value: 8,
+            value: 32,
             options: {
                 floor: 1,
-                ceil: 12,
+                ceil: 256,
                 step: 1
             }
         };
@@ -184,26 +184,6 @@ nplvoxelizer.component("nplvoxelizer", {
                     }
                 }
             })
-            //var req = {
-            //    method: 'POST',
-            //    url: url,
-            //    data: {
-            //        data: $scope.input_content,
-            //        block_length: $scope.slider.value,
-            //        input_format: $scope.input_format,
-            //        output_format: $scope.output_format
-            //    }
-            //}
-            //$http(req).then(function (response) {
-            //    var content = response.data[0];
-            //    console.log("CreateNewProject response value")
-            //    if (content) {
-            //        $scope.output_content = window.atob(content);
-            //        if (callback) {
-            //            callback();
-            //        }
-            //    }
-            //})
             //$http.get("ajax/nplvoxelizer?action=nplvoxelizer_voxelizer&data=" + $scope.input_content
             //        + "&block_length=" + $scope.slider.value
             //        + "&input_format=" + $scope.input_format
@@ -239,9 +219,13 @@ nplvoxelizer.component("nplvoxelizer", {
                 clearMeshes();
                 var loader = new THREE.STLLoader();
                 var geometry = loader.parse($scope.output_content);
-                aStlGeometry = geometry;
-                var material = new THREE.MeshBasicMaterial({ color: 0xff0000, vertexColors: THREE.VertexColors });
+                var material = new THREE.MeshPhongMaterial({ color: 0x0000ff, specular: 0x111111, shininess: 200 });
+                //var material = new THREE.MeshBasicMaterial({ color: 0xff0000, vertexColors: THREE.VertexColors });
                 var mesh = new THREE.Mesh(geometry, material);
+
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+
                 scene.add(mesh);
                 meshes.push(mesh);
                 $scope.is_loading = false;

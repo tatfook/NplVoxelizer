@@ -54,7 +54,7 @@ local input_format = request:get("input_format");
 local output_format = request:get("output_format");
 if(is_ajax()) then
 	add_action('wp_ajax_nplvoxelizer_voxelizer', function()
-		local result = ModelVoxelizerService.voxelizer(data,block_length,input_format,output_format);
+		local result = ModelVoxelizerService.voxelizer(data,true,block_length,input_format,output_format);
 		wp_send_json({result},true);
     end)
 	return;
