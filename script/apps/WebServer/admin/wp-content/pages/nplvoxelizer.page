@@ -47,6 +47,8 @@ wp_enqueue_script("NplVoxelizerController",				"/wp-content/pages/nplvoxelizer/c
 NPL.load("(gl)Mod/ModelVoxelizer/services/ModelVoxelizerService.lua");
 local ModelVoxelizerService = commonlib.gettable("Mod.ModelVoxelizer.services.ModelVoxelizerService");
 
+LOG.std(nil, "info", "nplvoxelizer page", "received a request");
+
 local data = request:get("data");
 local block_length = request:get("block_length");
 block_length = tonumber(block_length);
@@ -54,8 +56,13 @@ local input_format = request:get("input_format");
 local output_format = request:get("output_format");
 if(is_ajax()) then
 	add_action('wp_ajax_nplvoxelizer_voxelizer', function()
-		local result = ModelVoxelizerService.voxelizer(data,true,block_length,input_format,output_format);
-		wp_send_json({result},true);
+		LOG.std(nil, "info", "nplvoxelizer page", "do ajax action:nplvoxelizer_voxelizer");
+		local preview_stl_content,content = ModelVoxelizerService.voxelizer(data,true,block_length,input_format,output_format);
+		wp_send_json({preview_stl_content,content},true);
+    end)
+	add_action('wp_ajax_nplvoxelizer_post_test', function()
+		LOG.std(nil, "info", "nplvoxelizer page", "do ajax action:nplvoxelizer_post_test");
+		wp_send_json({"received"},true);
     end)
 	return;
 end

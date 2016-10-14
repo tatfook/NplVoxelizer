@@ -6,12 +6,24 @@ nplvoxelizer.component("nplvoxelizer", {
         if (Page)
             Page.ShowSideBar(false);
         $('#mask').hide();
-        
         var view_container = document.getElementById('view_container');
         var container, stats;
         var camera, scene, renderer;
         var controls, transformControl;
         var meshes = [];
+        var supported_extensions = ["stl", "bmax"];
+        function isSupported(format) {
+            if (!format) {
+                return false;
+            }
+            format = format.toLowerCase();
+            for (var i = 0; i < supported_extensions.length; i++) {
+                if (format == supported_extensions[i]) {
+                    return true;
+                }
+            }
+
+        }
         init_threejs();
         animate();
         function init_threejs() {
@@ -108,14 +120,15 @@ nplvoxelizer.component("nplvoxelizer", {
         $scope.input_content = "";
         $scope.input_format = "stl";
         $scope.output_format = "stl";
-        $scope.output_content = "";
+        $scope.preview_stl_content = null;
+        $scope.output_content = null;
         $scope.input_file_name = null;
         $scope.is_loading = false;
         $scope.slider = {
-            value: 32,
+            value: 16,
             options: {
                 floor: 1,
-                ceil: 256,
+                ceil: 64,
                 step: 1
             }
         };
@@ -144,6 +157,7 @@ nplvoxelizer.component("nplvoxelizer", {
         }
         $scope.uploadFile = function (files) {
             $scope.input_content = null;
+            $scope.preview_stl_content = null;
             $scope.output_content = null;
             clearMeshes();
 
@@ -173,30 +187,21 @@ nplvoxelizer.component("nplvoxelizer", {
                 block_length: $scope.slider.value,
                 input_format: $scope.input_format,
                 output_format: $scope.output_format
-            }; 
-            $http.post(url,data).then(function (response) {
-                var content = response.data[0];
-                console.log("CreateNewProject response value")
-                if (content) {
+            };
+            console.log("do post:", url);
+            //NOTE:use angular post is super slowly.
+            $.post(url, data).then(function (response) {
+                if (response.length > 1) {
+                    var preview_stl_content = response[0];
+                    var content = response[1];
+                    $scope.preview_stl_content = window.atob(preview_stl_content);
                     $scope.output_content = window.atob(content);
                     if (callback) {
                         callback();
                     }
                 }
+                
             })
-            //$http.get("ajax/nplvoxelizer?action=nplvoxelizer_voxelizer&data=" + $scope.input_content
-            //        + "&block_length=" + $scope.slider.value
-            //        + "&input_format=" + $scope.input_format
-            //        + "&output_format=" + $scope.output_format).then(function (response) {
-            //            var content = response.data[0];
-            //            console.log("CreateNewProject response value")
-            //            if (content) {
-            //                $scope.output_content = window.atob(content);
-            //                if (callback) {
-            //                    callback();
-            //                }
-            //            }
-            //        });
         }
         function removeObject(object) {
             if (object.parent === null) return;
@@ -218,7 +223,7 @@ nplvoxelizer.component("nplvoxelizer", {
                 $('#mask').hide();
                 clearMeshes();
                 var loader = new THREE.STLLoader();
-                var geometry = loader.parse($scope.output_content);
+                var geometry = loader.parse($scope.preview_stl_content);
                 var material = new THREE.MeshPhongMaterial({ color: 0x0000ff, specular: 0x111111, shininess: 200 });
                 //var material = new THREE.MeshBasicMaterial({ color: 0xff0000, vertexColors: THREE.VertexColors });
                 var mesh = new THREE.Mesh(geometry, material);
@@ -250,26 +255,30 @@ nplvoxelizer.component("nplvoxelizer", {
                 saveAs(blob, name);
             }
         }
-        $scope.onSave = function (format) {
 
+        $("#myButtons :input").change(function () {
+            var id = ($(this).attr('id'));
+            $scope.onSelected(id);
+        });
+
+        $scope.onSelected = function (format) {
+            if (!isSupported(format)) {
+                console.log("unsupported format:",format);
+            }
             if (!$scope.input_file_name) {
                 return
             }
-
-            var last_output_format = $scope.output_format;
-
-            $scope.output_format = format;
-
-            if (last_output_format != format) {
-
-                voxelizer(function () {
-                    saveFile($scope.input_file_name, $scope.output_format);
-                })
+            if ($scope.output_format == format) {
                 return;
             }
-            saveFile($scope.input_file_name, $scope.output_format);
+            $scope.output_format = format;
+            voxelizer();
         }
-
+        $scope.onSave = function () {
+            if ($scope.input_file_name && $scope.output_format) {
+                saveFile($scope.input_file_name, $scope.output_format);
+            }
+        }
         $scope.$on("slideEnded", function () {
             if (!$scope.is_loading) {
                 voxelizer()

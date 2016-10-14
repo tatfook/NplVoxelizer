@@ -1,22 +1,26 @@
 ﻿<div>
 
-    <div class="row">
-        <input type="file" style="padding:10px;" onchange="angular.element(this).scope().uploadFile(this.files)" />
-        <div class="col-lg-12" id="view_container" ></div>
+    <input type="file" style="padding:10px;" onchange="angular.element(this).scope().uploadFile(this.files)" />
+    <div id="view_container"></div>
 
-        <div class="col-md-12">
-            <rzslider rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
-        </div>
-        <div class="col-md-6">
-            <div style="margin-top:5px;">
-                <button type="button"  ng-click="onSave('stl')" class="btn btn-success" style="width:100px;"><span class="glyphicon glyphicon-download-alt"></span> .stl</button>
-                <button type="button"  ng-click="onSave('bmax')" class="btn btn-success" style="width:100px;"><span class="glyphicon glyphicon-download-alt"></span> .bmax</button>
+    <rzslider rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
+    <div class="row" style="margin-top:5px;">
+        <div class="col-md-11">
+            <div id="myButtons" class="btn-group" data-toggle="buttons">
+                <label class="btn btn-info active" style="width:100px;">
+                    <input type="radio" name="options" id="stl" checked><span class="glyphicon glyphicon-th"></span> .stl
+                </label>
+                <label class="btn btn-info" style="width:100px;">
+                    <input type="radio" name="options" id="bmax" ><span class="glyphicon glyphicon-th"></span> .bmax
+                </label>
             </div>
         </div>
-
+        <div class="col-md-1">
+            <button type="button" ng-click="onSave()" class="btn btn-primary" style="width:100px;margin-left:-25px;"><span class="glyphicon glyphicon-download-alt"></span> 保存</button>
+        </div>
     </div>
 
     <div id="mask">
-        <img src="wp-content/pages/nplvoxelizer/libs/ajaxloader.gif" class="loader"/>
+        <img src="wp-content/pages/nplvoxelizer/libs/ajaxloader.gif" class="loader" />
     </div>
 </div>
