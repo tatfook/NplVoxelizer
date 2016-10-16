@@ -191,6 +191,8 @@ nplvoxelizer.component("nplvoxelizer", {
             console.log("do post:", url);
             //NOTE:use angular post is super slowly.
             $.post(url, data).then(function (response) {
+                console.log("response", response);
+
                 if (response.length > 1) {
                     var preview_stl_content = response[0];
                     var content = response[1];
