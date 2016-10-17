@@ -38,10 +38,22 @@ nplvoxelizer.component("nplvoxelizer", {
             camera.lookAt(new THREE.Vector3());
             scene.add(camera);
 
+
             // light
-            scene.add(new THREE.HemisphereLight(0x443333, 0x111122));
-            addShadowedLight(1, 1, 1, 0xffffff, 1.35);
-            addShadowedLight(0.5, 1, -1, 0xffaa00, 1);
+            var ambientLight = new THREE.AmbientLight(0x444444);
+            ambientLight.name = 'ambientLight';
+            scene.add(ambientLight);
+
+            var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.x = 17;
+            directionalLight.position.y = 9;
+            directionalLight.position.z = 30;
+            directionalLight.name = 'directionalLight';
+            scene.add(directionalLight);
+
+            //scene.add(new THREE.HemisphereLight(0x443333, 0x111122));
+            //addShadowedLight(1, 1, 1, 0xffffff, 1.35);
+            //addShadowedLight(0.5, 1, -1, 0xffaa00, 1);
 
             var helper = new THREE.GridHelper(30, 1);
             helper.material.opacity = 0.25;
@@ -182,8 +194,9 @@ nplvoxelizer.component("nplvoxelizer", {
         function voxelizer_request(callback) {
             var url = "ajax/nplvoxelizer?action=nplvoxelizer_voxelizer";
             console.log("voxelizer request data length:", $scope.input_content.length, "block_length:", $scope.slider.value, "input_format:", $scope.input_format, "output_format:", $scope.output_format);
+            var content_data = $scope.input_content;
             var data =  {
-                data: $scope.input_content,
+                data: content_data,
                 block_length: $scope.slider.value,
                 input_format: $scope.input_format,
                 output_format: $scope.output_format
@@ -234,8 +247,9 @@ nplvoxelizer.component("nplvoxelizer", {
                 clearMeshes();
                 var loader = new THREE.STLLoader();
                 var geometry = loader.parse($scope.preview_stl_content);
-                var material = new THREE.MeshPhongMaterial({ color: 0x0000ff, specular: 0x111111, shininess: 200 });
+                //var material = new THREE.MeshPhongMaterial({ color: 0x0000ff, specular: 0x111111, shininess: 200 });
                 //var material = new THREE.MeshBasicMaterial({ color: 0xff0000, vertexColors: THREE.VertexColors });
+                var material = new THREE.MeshLambertMaterial({ side: THREE.DoubleSide, color: 0x0000ff, vertexColors: THREE.VertexColors });
                 var mesh = new THREE.Mesh(geometry, material);
 
                 mesh.castShadow = true;
@@ -291,6 +305,9 @@ nplvoxelizer.component("nplvoxelizer", {
         }
         $scope.$on("slideEnded", function () {
             if (!$scope.is_loading) {
+                $scope.preview_stl_content = null;
+                $scope.output_content = null;
+                clearMeshes();
                 voxelizer()
             }
         });
