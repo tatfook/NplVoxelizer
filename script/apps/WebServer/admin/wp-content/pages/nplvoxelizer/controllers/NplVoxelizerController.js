@@ -191,13 +191,21 @@ nplvoxelizer.component("nplvoxelizer", {
             console.log("do post:", url);
             //NOTE:use angular post is super slowly.
             $.post(url, data).then(function (response) {
-                console.log("response", response);
-
-                if (response.length > 1) {
+                console.log("received voxelizer_request");
+                //console.log("response", response);
+                if (response.length > 0) {
                     var preview_stl_content = response[0];
                     var content = response[1];
-                    $scope.preview_stl_content = window.atob(preview_stl_content);
-                    $scope.output_content = window.atob(content);
+                    if (preview_stl_content) {
+                        $scope.preview_stl_content = window.atob(preview_stl_content);
+                    }
+                    if (content) {
+                        $scope.output_content = window.atob(content);
+                    }
+                    if ($scope.output_format == "stl") {
+                        // same as preview_stl_content.
+                        $scope.output_content = $scope.preview_stl_content;
+                    }
                     if (callback) {
                         callback();
                     }

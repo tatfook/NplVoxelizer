@@ -57,12 +57,16 @@ local output_format = request:get("output_format");
 if(is_ajax()) then
 	add_action('wp_ajax_nplvoxelizer_voxelizer', function()
 		LOG.std(nil, "info", "nplvoxelizer page", "do ajax action:nplvoxelizer_voxelizer");
+		local preview_stl_content;
+		local content
 		ModelVoxelizerService.start(data,true,block_length,input_format,output_format,function(msg)
-			local preview_stl_content = msg.preview_stl_content;
-			local content = msg.content;
-			--wp_send_json({preview_stl_content,content},true);
-			wp_send_json({"test"},true);
+			preview_stl_content = msg.preview_stl_content;
+			content = msg.content;
+			resume();
 		end);
+		yield();
+		wp_send_json({preview_stl_content,content},true);
+
     end)
 	return;
 end
