@@ -8,11 +8,6 @@ Desc:
 
 
 wp_enqueue_style("bootstrap-css",				"/wp-includes/js/bootstrap/css/bootstrap.min.css");
---bootstrap
---wp_enqueue_script("bootstrap",					"/wp-content/pages/nplvoxelizer/libs/bootstrap/js/bootstrap.min.js");
---wp_enqueue_style("bootstrap-css",				"/wp-content/pages/nplvoxelizer/libs/bootstrap/css/bootstrap.min.css");
-
---jquery
 wp_enqueue_script("jquery",						"/wp-includes/js/jquery/jquery.min.js");
 
 wp_enqueue_script("ace",						"/wp-includes/js/ace/ace.js"); 
@@ -31,9 +26,6 @@ wp_enqueue_style("rzslider-css",				"/wp-content/pages/nplvoxelizer/libs/rzslide
 
 --threejs
 wp_enqueue_script("threejs",					"/wp-content/pages/nplvoxelizer/libs/threejs/three.min.js");
-wp_enqueue_script("threejs-ui-lib",					"/wp-content/pages/nplvoxelizer/libs/threejs/ui.js");
-wp_enqueue_script("threejs-ui",					"/wp-content/pages/nplvoxelizer/libs/threejs/ui.three.js");
-wp_enqueue_script("EditorControls",					"/wp-content/pages/nplvoxelizer/libs/threejs/controls/EditorControls.js");
 wp_enqueue_script("TransformControls",					"/wp-content/pages/nplvoxelizer/libs/threejs/controls/TransformControls.js");
 wp_enqueue_script("OrbitControls",					"/wp-content/pages/nplvoxelizer/libs/threejs/controls/OrbitControls.js");
 wp_enqueue_script("STLLoader",					"/wp-content/pages/nplvoxelizer/libs/threejs/STLLoader.js");
